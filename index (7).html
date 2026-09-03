@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schema Akkusativ / Dativ – Deutsch, meine Sprache</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark-green: #1B4332;
+    --gold: #C9A84C;
+    --cream: #FAF6EF;
+    --soft-green: #EDF3EE;
+    --line: #9CA3AF;
+    --box-bg: #FFFFFF;
+    --box-border: #D9D2C2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    font-family: 'Inter', sans-serif;
+    color: var(--dark-green);
+    padding: 24px 16px 60px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 24px; }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 0 0 6px;
+  }
+  .subtitle { font-size: 15px; opacity: 0.75; margin: 0; }
+  .diagram-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px 10px;
+    box-shadow: 0 4px 18px rgba(27, 67, 50, 0.08);
+    margin-bottom: 24px;
+  }
+  svg { width: 100%; height: auto; display: block; }
+  .dbox { fill: var(--box-bg); stroke: var(--box-border); stroke-width: 1.5; cursor: pointer; }
+  .dbox.sel { stroke: var(--gold); stroke-width: 3; }
+  .dbox.static { cursor: default; }
+  .t1 { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 600; fill: var(--dark-green); }
+  .t2 { font-family: 'Inter', sans-serif; font-size: 12px; fill: var(--dark-green); opacity: 0.7; }
+  .arrow { stroke: var(--line); stroke-width: 2; fill: none; }
+  .panel {
+    background: var(--soft-green);
+    border-radius: 16px;
+    padding: 16px 20px;
+    font-size: 16px;
+    line-height: 2;
+    min-height: 24px;
+  }
+  .v { color: #2563eb; font-style: italic; }
+  .a { color: #dc2626; font-weight: 700; }
+  .d { color: #16a34a; font-weight: 700; }
+  .u { text-decoration: underline; }
+  .ro-note { color: var(--dark-green); opacity: 0.65; font-style: normal; }
+  .legend {
+    display: flex; gap: 18px; justify-content: center; margin-bottom: 16px;
+    font-size: 12px; flex-wrap: wrap;
+  }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Akkusativ oder Dativ?</h1>
+    <p class="subtitle">Schema de decizie — verb și prepoziție (apasă pe casete pentru exemple)</p>
+  </header>
+
+  <div class="legend">
+    <span><span class="dot" style="background:#dc2626"></span>Acuzativ</span>
+    <span><span class="dot" style="background:#16a34a"></span>Dativ</span>
+    <span><span class="dot" style="background:#C9A84C"></span>duală</span>
+    <span><span class="dot" style="background:#2563eb"></span>verb</span>
+  </div>
+
+  <div class="diagram-card">
+    <svg viewBox="0 0 680 620" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+        </marker>
+      </defs>
+
+      <!-- Pasul 1 -->
+      <g class="dbox static"><rect x="140" y="30" width="400" height="44" rx="10"/>
+        <text class="t1" x="340" y="52" text-anchor="middle" dominant-baseline="central">Primul pas: verb de mișcare sau static?</text>
+      </g>
+
+      <line x1="180" y1="110" x2="500" y2="110" class="arrow"/>
+      <line x1="180" y1="110" x2="180" y2="150" class="arrow" marker-end="url(#arrow)"/>
+      <line x1="500" y1="110" x2="500" y2="150" class="arrow" marker-end="url(#arrow)"/>
+
+      <g id="v-akk" class="dbox" onclick="selectNode('v-akk')" style="fill:#FDECEC">
+        <rect x="80" y="150" width="200" height="56" rx="10"/>
+        <text class="t1" x="180" y="168" text-anchor="middle" dominant-baseline="central" fill="#dc2626">Acuzativ</text>
+        <text class="t2" x="180" y="186" text-anchor="middle" dominant-baseline="central">verb tranzitiv</text>
+      </g>
+
+      <g id="v-dat" class="dbox" onclick="selectNode('v-dat')" style="fill:#E8F5E9">
+        <rect x="400" y="150" width="200" height="56" rx="10"/>
+        <text class="t1" x="500" y="168" text-anchor="middle" dominant-baseline="central" fill="#16a34a">Dativ</text>
+        <text class="t2" x="500" y="186" text-anchor="middle" dominant-baseline="central">verb static</text>
+      </g>
+
+      <!-- linie unica, neintrerupta -->
+      <line x1="340" y1="74" x2="340" y2="300" class="arrow" marker-end="url(#arrow)"/>
+
+      <!-- Pasul 2 -->
+      <g class="dbox static"><rect x="200" y="296" width="280" height="44" rx="10"/>
+        <text class="t1" x="340" y="318" text-anchor="middle" dominant-baseline="central">Pasul 2: are prepoziție?</text>
+      </g>
+
+      <path d="M340,340 L340,370" class="arrow" marker-end="url(#arrow)"/>
+      <text class="t2" x="360" y="358" text-anchor="start">Da</text>
+
+      <g class="dbox static"><rect x="250" y="370" width="180" height="44" rx="10"/>
+        <text class="t1" x="340" y="392" text-anchor="middle" dominant-baseline="central">Ce fel de prepoziție?</text>
+      </g>
+
+      <path d="M340,414 L340,440 L130,440 L130,460" class="arrow" marker-end="url(#arrow)"/>
+      <path d="M340,414 L340,460" class="arrow" marker-end="url(#arrow)"/>
+      <path d="M340,414 L340,440 L550,440 L550,460" class="arrow" marker-end="url(#arrow)"/>
+
+      <g id="p-akk" class="dbox" onclick="selectNode('p-akk')" style="fill:#FDECEC">
+        <rect x="40" y="460" width="180" height="56" rx="10"/>
+        <text class="t1" x="130" y="478" text-anchor="middle" dominant-baseline="central" fill="#dc2626">Acuzativ</text>
+        <text class="t2" x="130" y="496" text-anchor="middle" dominant-baseline="central">ohne, für</text>
+      </g>
+
+      <g id="p-dat" class="dbox" onclick="selectNode('p-dat')" style="fill:#E8F5E9">
+        <rect x="250" y="460" width="180" height="56" rx="10"/>
+        <text class="t1" x="340" y="478" text-anchor="middle" dominant-baseline="central" fill="#16a34a">Dativ</text>
+        <text class="t2" x="340" y="496" text-anchor="middle" dominant-baseline="central">mit, bei, von, zu</text>
+      </g>
+
+      <g id="p-dual" class="dbox" onclick="selectNode('p-dual')" style="fill:#FFF4E0">
+        <rect x="460" y="460" width="180" height="56" rx="10"/>
+        <text class="t1" x="550" y="478" text-anchor="middle" dominant-baseline="central" fill="#B8860B">Prep. duală</text>
+        <text class="t2" x="550" y="496" text-anchor="middle" dominant-baseline="central">in, auf, über, neben</text>
+      </g>
+
+      <path d="M550,516 L550,546" class="arrow" marker-end="url(#arrow)"/>
+
+      <g class="dbox static"><rect x="460" y="552" width="180" height="46" rx="10"/>
+        <text x="550" y="570" text-anchor="middle" dominant-baseline="central" style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;fill:var(--dark-green)">↻ Revino la Pasul 1</text>
+        <text x="550" y="586" text-anchor="middle" dominant-baseline="central" class="t2">verifică verbul</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="panel" id="panel">Apasă pe o casetă din schemă pentru un exemplu.</div>
+</div>
+
+<script>
+var examples = {
+  "v-akk": "Ich <span class='v'>kaufe</span> <span class='a'>das</span> Brot <span class='ro-note'>(cumpăr pâinea)</span>",
+  "v-dat": "Ich <span class='v'>helfe</span> <span class='d u'>dem</span> Mann <span class='ro-note'>(ajut bărbatului)</span> — verb static, cere Dativ",
+  "p-akk": "Ich <span class='v'>gehe</span> <span class='a'>ohne</span> ihn <span class='ro-note'>(merg fără el)</span>",
+  "p-dat": "Ich <span class='v'>gehe</span> <span class='d'>mit</span> ihm <span class='ro-note'>(merg cu el)</span>",
+  "p-dual": "Ich <span class='v'>gehe</span> <span class='u'>in</span> <span class='a'>die</span> Arbeit <span class='ro-note'>(merg la muncă)</span> → Acuzativ<br>Ich <span class='v' style='font-weight:600'>bin</span> <span class='u'>in</span> <span class='d'>der</span> Arbeit <span class='ro-note'>(sunt la muncă)</span> → Dativ<br><span class='ro-note'>Te întorci la verificarea verbului (Pasul 1).</span>"
+};
+
+function selectNode(id) {
+  document.querySelectorAll('.dbox').forEach(function(el) { el.classList.remove('sel'); });
+  var node = document.getElementById(id);
+  if (node) node.classList.add('sel');
+  document.getElementById('panel').innerHTML = examples[id];
+}
+</script>
+</body>
+</html>
